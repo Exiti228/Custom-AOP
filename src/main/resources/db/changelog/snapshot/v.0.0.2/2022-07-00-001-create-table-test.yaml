@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 05-07-2022-create-table-test
+      author: Mikhail
+      changes:
+        - createTable:
+            tableName: test
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: duration_ms
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: method_name
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
