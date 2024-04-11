@@ -8,7 +8,9 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.concurrent.CompletableFuture;
 
 @Component
@@ -31,6 +33,7 @@ public class LoggingAspect {
     }
 
     @Around("@annotation(com.example.t1_hw1.annotation.TrackAsyncTime)")
+    @Transactional(rollbackFor = { SQLException.class })
     public Object logTrackAsyncTime(ProceedingJoinPoint joinPoint) {
         return CompletableFuture.runAsync(() -> {
             try {
